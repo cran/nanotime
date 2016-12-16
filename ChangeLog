@@ -1,0 +1,49 @@
+2016-12-15  Dirk Eddelbuettel  <edd@debian.org>
+
+	* R/nanotime.R (as.POSIXct.nanotime,as.POSIXlt.nanotime)
+	(as.Date.nanotime): New converters
+	(format.nanotime): Add 'justify' argument
+	* man/nanotime.Rd: Document new and updated methods
+	* NAMESPACE: Registered new converters
+
+	* tests/simpleTests.R: Additional calls to new functions
+
+	* inst/NEWS.Rd:  Added
+
+	* DESCRIPTION (SystemRequirements): State RcppCCTZ dependency
+
+2016-12-11  Dirk Eddelbuettel  <edd@debian.org>
+
+	* R/nanotime.R (index2char.nanotime): Added to have zoo() objects
+	print a nanotime index correctly
+	(nanotime.default): Switch class order with integer64 last
+	(print.nanotime): Minor adjustment
+	(format.nanotime): Added
+	(showNanotime): Removed
+	(format.nanotime): Support global option for format
+
+	* NAMESPACE: Register S3 methods index2char.nanotime, format.nanotime;
+	import two functions from RcppCCTZ (which are now exported)
+	* DESCRIPTION: Now Imports: rather than Suggests: zoo
+	* tests/zooTests.R: Small changes
+
+	* .travis.yml: Added
+	* .codecov.yml: Ditto
+	* .Rbuildignore: Adjusted accordingly
+
+	* tests/simpleTests.R: Two more conversions from integer and numeric
+
+2016-12-10  Dirk Eddelbuettel  <edd@debian.org>
+
+	* tests/zooTests.R: Simple tests for vectorised time operation
+
+	* R/nanotime.R (print.nanotime): Do not default to character
+	formating here, rather farm out to helper showNanotime
+	(showNanotime): Simple pretty printer
+
+	* tests/simpleTests.R: Added calls to snowNanotime()
+
+2016-12-09  Dirk Eddelbuettel  <edd@debian.org>
+
+	* DESCRIPTION (Version): Very initial pre-release 0.0.0
+

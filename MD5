@@ -1,0 +1,11 @@
+4971596641c77bb35ddabb0a3c5e3084 *ChangeLog
+0fbbabda03277f18792e457fb9725555 *DESCRIPTION
+c2dcc07ec48250b0f5a72fa8543548f7 *NAMESPACE
+69e10501338050e2bfdde1833c8166c7 *R/nanotime.R
+bcd692ee0c87ec7ad9fb8f716ecaa097 *README.md
+ab5e29eb89b30c7b5b0c09adca74fcf7 *build/partial.rdb
+9be3e641ff142bb833622b17572ce2ff *man/nanotime-package.Rd
+5b5c79ae8cde97d95eb7d4ffa2f27ea1 *man/nanotime.Rd
+22fdad0781464eb37925e754e70a041a *tests/POSIXt.R
+eb138cfd21f653af0428640d81fee646 *tests/simpleTests.R
+988d5f8134b41899d48aa1c6ae939042 *tests/zooTests.R
