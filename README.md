@@ -16,7 +16,7 @@ But more and more performance measurements, latency statistics, ... are now meas
 and we need _nanosecond_ resolution. For which commonly an `integer64` is used to represent
 nanoseconds since the epoch.
 
-And while R does not a _native_ type for this, the [bit64](https://cran.r-project.org/package=bit64)
+And while R does not have a _native_ type for this, the [bit64](https://cran.r-project.org/package=bit64)
 package by [Jens Oehlschlägel](https://github.com/joehl) offers a performant one implemented as a
 lightweight S3 class.  So this package uses this `integer64` class, along with two helper functions
 for parsing and formatting, respectively, at nano-second resolution from the
@@ -24,6 +24,13 @@ for parsing and formatting, respectively, at nano-second resolution from the
 [CCTZ library](https://github.com/google/cctz) from Google.  CCTZ is a modern C++11 library
 extending the (C++11-native) `chrono` type.
 
+### Demo
+
+See the included demo script [nanosecondDelayExample.R](https://github.com/eddelbuettel/nanotime/blob/master/demo/nanosecondDelayExample.R) 
+for a (completely simulated and hence made-up) study of network latency measured 
+in nanoseconds resulting in the figure below
+
+![](https://eddelbuettel.github.io/nanotime/local/images/nanotimeDelayDemo.png "network delay demo image")
 
 ### Examples
 
@@ -87,6 +94,8 @@ R> library(bit64)   # register some print methods for integer64
 R> raw <- data.table(cbind(A=1:5, B=5:1), v)
 R> fwrite(raw, file="/tmp/raw.csv")
 R> cooked <- fread("/tmp/raw.csv")
+R> ## csv files are not 'typed' so need to recover type explicitly
+R> cooked[, `:=`(rdsent=nanotime(rdsent), rdrecv=nanotime(rdrecv), sdsent=nanotime(sdsent), sdrecv=nanotime(sdrecv))]
 ```
 
 ### Technical Details
@@ -107,18 +116,21 @@ See the [issue tickets](https://github.com/eddelbuettel/nanotime/issues) for an 
 
 ### Installation
 
-Once on [CRAN](https://cran.r-project.org) you will be able to do 
+The package is on [CRAN](https://cran.r-project.org) and can be installed
+via a standard
 
 ```r
 install.packages("nanotime")
 ```
 
-Until then, or to install development versions, it can also be installed via a standard
+whereas in order to install development versions a
 
 ```r
-install.packages("RcppCCTZ")   # need 0.1.0 or later
-remotes::install_github("eddelbuettel/nanotime")  
+remotes::install_github("eddelbuettel/nanotime")  # dev version
 ```
+
+should suffice. 
+
 
 ### Author
 

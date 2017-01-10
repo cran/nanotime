@@ -1,4 +1,60 @@
+2017-01-10  Dirk Eddelbuettel  <edd@debian.org>
+
+	* DESCRIPTION (Version, Date): Release 0.1.0
+
+2017-01-09  Dirk Eddelbuettel  <edd@debian.org>
+
+	* DESCRIPTION (Version, Date): Roll minor version
+
+	* DESCRIPTION (SystemRequirements, OS_type): Remove constraint on
+	Unix as RcppCCTZ is now available on Windows too
+
+	* demo/nanosecondDelayExample.R: Add missing library() calls; added
+	save and reload example
+
+	* README.md: Small edit showing save and reload
+
+2016-12-22  Dirk Eddelbuettel  <edd@debian.org>
+
+	* README.md: Updated to reflect CRAN status
+
+2016-12-18  Dirk Eddelbuettel  <edd@debian.org>
+
+	* demo/00Index: New file, demo now in package
+	* demo/nanosecondDelayExample.R: Renamed demo
+
+2016-12-17  Dirk Eddelbuettel  <edd@debian.org>
+
+	* R/nanotime.R (as.data.frame.nanotime): Documented
+	(nanotime.character): Support tz and fmt options
+	(format.nanotime): Idem
+	(index2char.nanotime): Idem
+	(as.POSIXct.nanotime): Idem
+	(as.POSIXlt.nanotime): Idem
+
+	* man/nanotime.Rd: Idem
+
+	* tests/data.frame.R: Added simple data.{frame,table} test
+	* tests/simpleTests.R: Added simple format tests
+
+	* demo/nanotimeEx.R: Extended somewhat
+
+	* DESCRIPTION (Suggests): Added data.table
+	* .travis.yml: Added r-cran-data.table
+
+2016-12-16  Dirk Eddelbuettel  <edd@debian.org>
+
+	* DESCRIPTION (Version, Date): Rolled minor version
+
+	* R/nanotime.R (as.data.frame.nanotime): New method
+	(format.nanotime): Support additional arguments
+
+	* man/nanotime.Rd: Updated for new method
+	* NAMESPACE: Idem
+
 2016-12-15  Dirk Eddelbuettel  <edd@debian.org>
+
+	* DESCRIPTION (Version, Date): Release 0.0.1
 
 	* R/nanotime.R (as.POSIXct.nanotime,as.POSIXlt.nanotime)
 	(as.Date.nanotime): New converters

@@ -4,6 +4,7 @@
 \alias{as.Date.nanotime}
 \alias{as.POSIXct.nanotime}
 \alias{as.POSIXlt.nanotime}
+\alias{as.data.frame.nanotime}
 \alias{format.nanotime}
 \alias{index2char.nanotime}
 \alias{nanotime}
@@ -35,15 +36,18 @@ nanotime(x)
 
 \method{print}{nanotime}(x, ...)
 
-\method{format}{nanotime}(x, justify = "right", ...)
+\method{format}{nanotime}(x, justify = "right", digits = NULL,
+  na.encode = FALSE, trim = TRUE, ...)
 
 \method{index2char}{nanotime}(x, frequency = NULL, ...)
 
-\method{as.POSIXct}{nanotime}(x, tz = "UTC", ...)
+\method{as.POSIXct}{nanotime}(x, tz, ...)
 
-\method{as.POSIXlt}{nanotime}(x, tz = "UTC", ...)
+\method{as.POSIXlt}{nanotime}(x, tz, ...)
 
 \method{as.Date}{nanotime}(x, ...)
+
+\method{as.data.frame}{nanotime}(x, ...)
 }
 \arguments{
 \item{x}{The object which want to convert to class \code{nanotime}}
@@ -52,10 +56,17 @@ nanotime(x)
 
 \item{justify}{Required for \code{format} method but ignored here}
 
+\item{digits}{Required for  \code{format} method but ignored here}
+
+\item{na.encode}{Required for  \code{format} method but ignored here}
+
+\item{trim}{Required for  \code{format} method but ignored here}
+
 \item{frequency}{Required for \code{index2char} method but ignored here}
 
 \item{tz}{Required for \code{as.POSIXct} and \code{as.POSIXlt},
-currently fixed to \sQuote{UTC} and ignored}
+can be set via \code{options("nanotimeFormat")} and uses \sQuote{UTC} as
+a default and fallback}
 }
 \value{
 A nanotime object
