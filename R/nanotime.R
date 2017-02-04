@@ -43,6 +43,19 @@
 ##' library type \code{chrono} type in very useful ways for time zones and
 ##' localtime.  We use its formating and parsing features.
 ##'
+##' @section Output Format:
+##'
+##' Formatting and character conversion for \code{nanotime} objects is
+##' done by functions from the \code{\link{RcppCCTZ}} package relying
+##' on code from its embedded \code{CCTZ} library. The default format
+##' is ISO3339 compliant: \code{\%Y-\%m-\%dT\%H:\%M:\%E9S\%Ez}. It
+##' specifies a standard ISO 8601 part for date and time --- as well
+##' as nine digits of precision for fractional seconds (down to
+##' nanoseconds) and on offset (typically zero as we default to UTC).
+##' It can be overriden by using \code{options()} with the key of
+##' \code{nanotimeFormat} and a suitable value. Similarly,
+##' \code{nanotimeTz} can be used to select a different timezone.
+##' 
 ##' @param x The object which want to convert to class \code{nanotime}
 ##' @param frequency Required for \code{index2char} method but ignored here
 ##' @param justify Required for \code{format} method but ignored here
@@ -52,6 +65,8 @@
 ##' @param tz Required for \code{as.POSIXct} and \code{as.POSIXlt},
 ##' can be set via \code{options("nanotimeFormat")} and uses \sQuote{UTC} as
 ##' a default and fallback
+##' @param e1 Operand of class \code{nanotime}
+##' @param e2 Operand of class \code{nanotime}
 ##' @param ... Required for print method signature but ignored here
 ##' @return A nanotime object
 ##' @author Dirk Eddelbuettel
@@ -66,8 +81,7 @@
 ##' format(x)
 ##' format(nanotime(Sys.time()) + 1:3)  # three elements each 1 ns apart
 nanotime <- function(x) {
-    ## generic function, converts an object to a raw
-    UseMethod("nanotime")
+    UseMethod("nanotime")    	# generic function,
 }
 
 ##' @rdname nanotime
@@ -85,7 +99,7 @@ nanotime.numeric <- function(x) {
 
 ##' @rdname nanotime
 nanotime.character <- function(x) {
-    fmt <- getOption("nanotimeFormat", default="%Y-%m-%dT%H:%M:%E*S%Ez")
+    fmt <- getOption("nanotimeFormat", default="%Y-%m-%dT%H:%M:%E9S%Ez")
     tz <- getOption("nanotimeTz", default="UTC")
     d <- RcppCCTZ::parseDouble(x, fmt=fmt, tz=tz)
     y <- as.integer64(d[,1]) * 1e9 + as.integer64(d[, 2])
@@ -119,38 +133,32 @@ nanotime.Date <- function(x) {
 
 ##' @rdname nanotime
 print.nanotime <- function(x, ...) {
-    ##NextMethod()	# cleaner ?
-
-    ## the following borrows from bit64::print.integer64
-    a <- attributes(x)
-    ret <- x
-    a$class <- minusclass(a$class, "nanotime")
-    attributes(ret) <- a
-    print(ret, ...)
-
+    print(format.nanotime(x, ...))
     invisible(x)
 }
 
 ##' @rdname nanotime
-format.nanotime <- function(x, 
+format.nanotime <- function(x,
                             justify="right",
                             digits=NULL,
                             na.encode=FALSE,
                             trim=TRUE,
                             ...) {
-    fmt <- getOption("nanotimeFormat", default="%Y-%m-%dT%H:%M:%E*S%Ez")
+    fmt <- getOption("nanotimeFormat", default="%Y-%m-%dT%H:%M:%E9S%Ez")
     tz <- getOption("nanotimeTz", default="UTC")
-    secs  <- trunc(as.double(x/1e9))
-    nanos <- as.double(x - secs*1e9)
-    RcppCCTZ::formatDouble(secs, nanos, fmt=fmt, tgttzstr=tz)
+    bigint <- as.integer64(x)
+    secs  <- as.integer64(bigint / as.integer64(1000000000))
+    nanos <- bigint - secs * as.integer64(1000000000)
+    RcppCCTZ::formatDouble(as.double(secs), as.double(nanos), fmt=fmt, tgttzstr=tz)
 }
 
 ##' @rdname nanotime
 index2char.nanotime <- function(x, frequency = NULL, ...) {
-    secs  <- trunc(as.double(x/1e9))
-    nanos <- as.double(x - secs*1e9)
-    RcppCCTZ::formatDouble(secs, nanos,
-                           fmt=getOption("nanotimeFormat", default="%Y-%m-%dT%H:%M:%E*S%Ez"),
+    bigint <- as.integer64(x)
+    secs  <- as.integer64(bigint / as.integer64(1000000000))
+    nanos <- bigint - secs * as.integer64(1000000000)
+    RcppCCTZ::formatDouble(as.double(secs), as.double(nanos),
+                           fmt=getOption("nanotimeFormat", default="%Y-%m-%dT%H:%M:%E9S%Ez"),
                            tgttzstr=getOption("nanotimeTz", default="UTC"))
 }
 
@@ -182,4 +190,25 @@ as.data.frame.nanotime <- function(x, ...) {
     k <- length(ret)
     for (i in 1:k) attr(ret[[i]], "class") <- cl
     ret
+}
+
+##' @rdname nanotime
+as.integer64.nanotime <- function(x, ...) {
+    a <- attributes(x)
+    ret <- x
+    a$class <- minusclass(a$class, "nanotime")
+    attributes(ret) <- a
+    ret
+}
+
+##' @rdname nanotime
+Ops.nanotime <- function(e1, e2) {
+    res <- get(.Generic)(as.integer64(e1), as.integer64(e2))
+    op <- .Generic[[1]]
+    if (op %in% c("<=", "<", "!=", "==", ">=", ">>")) {
+        res <- as.logical(res)          # want comparison as bool
+    } else if (op %in% c("+", "-")) {
+        res <- nanotime(res)       	# want +/- as nanotime
+    }
+    res
 }
