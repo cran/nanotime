@@ -1,3 +1,100 @@
+2017-06-22  Dirk Eddelbuettel  <edd@debian.org>
+
+	* DESCRIPTION (Version, Date): Release 0.2.0
+
+2017-06-21  Dirk Eddelbuettel  <edd@debian.org>
+
+	* DESCRIPTION (Version, Date): Roll minor version
+
+	* DESCRIPTION (Imports): Require RcppCCTZ (>= 0.2.3)
+
+	* inst/unitTests/test_nanotime.R: No longer condition out Windows
+	* inst/unitTests/test_nanotime.R: Ditto
+	* inst/unitTests/test_xts.R: Ditto
+
+	* .travis.yml (group): Added as required by Travis CI
+
+2017-06-16  Dirk Eddelbuettel  <edd@debian.org>
+
+	* R/nanotime.R (nanotime.matrix): Adding '#nocov' tags
+
+2017-06-15  Dirk Eddelbuettel  <edd@debian.org>
+
+	* DESCRIPTION (Version, Date): New minor version
+
+	* tests/runTests.R: Rewritten test runner
+
+	* inst/unitTests/test_zoo.R (test_zoo): Condition on zoo present, and
+	test not running under Windows
+
+	* inst/unitTests/test_xts.R (.setUp): Condition on a 'future' xts
+	version present as we really nedd xts to be nanotime aware for these tests
+
+	* inst/unitTests/test_nanotime.R: Condition a number of tests on not
+	running under Windows
+
+	* DESCRIPTION (Suggests): Added 'xts'
+	* .travis.yml (install): Ditto
+
+2017-06-14  Leonardo Silvestri  <lsilvestri@ztsdb.org>
+
+	* R/nanotime.R: Error on ops not meaningful for type,
+	also fix handling of NA, NAN, Inf, -Inf
+
+	* man/nanotime.Rd: Corresponding documentation
+	* inst/unitTests/test_nanotime.R: corresponding test
+
+2017-06-05  Leonardo Silvestri  <lsilvestri@ztsdb.org>
+
+	* R/nanotime.R: Correct summary() by defining 'names<-'; fix 'c'
+
+	* man/nanotime.Rd: Corresponding documentation
+	* inst/unitTests/test_nanotime.R: corresponding test
+
+2017-06-03  Leonardo Silvestri  <lsilvestri@ztsdb.org>
+
+	* R/nanotime.R: Prevent print from printing more than
+	options()$max.print
+
+2017-06-02  Leonardo Silvestri  <lsilvestri@ztsdb.org>
+
+	* R/nanotime.R: Ensure names are kept for nanotime vectors
+	* inst/unitTests/test_nanotime.R: corresponding test
+
+2017-05-02  Leonardo Silvestri  <lsilvestri@ztsdb.org>
+
+	* R/nanotime.R: Ensure 'tz=""' is treated as missing
+
+2017-04-04  Leonardo Silvestri  <lsilvestri@ztsdb.org>
+
+	* R/nanotime.R: Remove spurious debug output
+
+2017-03-29  Dirk Eddelbuettel  <edd@debian.org>
+
+	* DESCRIPTION (Version, Date): Roll minor version
+
+	* man/nanotime.Rd: Minor update
+
+	* nanotime.Rproj: Use devtools::document to work around a roxygen2
+	bug with S4 and setOldClass
+
+2017-03-29  Leonardo Silvestri  <lsilvestri@ztsdb.org>
+
+	[ The following is summary of changes made over several weeks ]
+	* DESCRIPTION: Convert to S4 class
+	* NAMESPACE: Idem
+	* R/nanotime.R: Idem
+	* inst/unitTests/test_data.frame.R: Idem
+	* inst/unitTests/test_nanotime.R: Idem
+	* inst/unitTests/test_ops.R: Idem
+	* inst/unitTests/test_xts.R: Idem
+	* inst/unitTests/test_zoo.R: Idem
+	* man/nanotime-class.Rd: Idem
+	* man/nanotime-package.Rd: Idem
+	* man/nanotime.Rd: Idem
+	* tests/runTests.R: Idem
+	* tests/simpleTests.R: Idem
+
 2017-03-27  Dirk Eddelbuettel  <edd@debian.org>
 
 	* DESCRIPTION (Version, Date): Release 0.1.2
