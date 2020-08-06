@@ -3,6 +3,27 @@
 \newcommand{\ghpr}{\href{https://github.com/eddelbuettel/nanotime/pull/#1}{##1}}
 \newcommand{\ghit}{\href{https://github.com/eddelbuettel/nanotime/issues/#1}{##1}}
 
+\section{Changes in version 0.3.0 (2020-07-2y)}{
+  \itemize{
+    \item Use \code{tzstr=} instead of \code{tz=} in call to
+    \pkg{RcppCCTZ::parseDouble()}) (Matt Dowle in \ghpr{49}). 
+    \item Add new comparison operators for \code{nanotime} and
+    \code{charcters} (Dirk in \ghpr{54} fixing \ghit{52}).
+    \item Switch from \pkg{RUnit} to \pkg{tinytest} (Dirk in \ghpr{55})
+    \item Substantial functionality extension in with new types
+    \code{nanoduration}, \code{nanoival} and \code{nanoperiod} (Leonardo
+    in \ghpr{58}, \ghpr{60}, \ghpr{62}, \ghpr{63}, \ghpr{65}, \ghpr{67},
+    \ghpr{70} fixing \ghit{47}, \ghit{51}, \ghit{57}, \ghit{61},
+    \ghit{64} with assistance from Dirk). 
+    \item A new (yet still draft-ish) vignette was added describing the
+    four core types (Leonardo and Dirk in \ghpr{71}).
+    \item A required compilation flag for Windows was added (Leonard in
+    \ghpr{72}).
+    \item \pkg{RcppCCTZ} function are called in new 'non-throwing'
+    variants to not trigger exeception errors (Leonardo in \ghpr{73}).
+  }
+}
+
 \section{Changes in version 0.2.4 (2019-05-25)}{
   \itemize{
     \item Define [[ method (Dirk in \ghpr{45} fixing \ghit{44}).

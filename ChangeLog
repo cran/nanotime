@@ -1,3 +1,297 @@
+2020-08-05  Dirk Eddelbuettel  <edd@debian.org>
+
+	* DESCRIPTION (Date, Version): Release 0.3.0
+
+2020-08-02  Leonardo Silvestri  <lsilvestri@ztsdb.org>
+
+	* src/interval.cpp: Use non-throwing RcppCCTZ function
+	* src/nanotime.cpp: Idem
+	* src/period.cpp: Idem
+	* inst/include/nanotime/globals.hpp: More (u)int64_t
+	* R/nanoival.R: Refine error message check
+	* R/nanotime.R: Idem
+
+2020-07-29  Dirk Eddelbuettel  <edd@debian.org>
+
+	* DESCRIPTION (Version, Date): Roll minor version
+
+2020-07-29  Leonardo Silvestri  <lsilvestri@ztsdb.org>
+
+	* src/Makevars.win: Add to set explicit '-mno-ms-bitfields' flag
+	required for bitfield operations on Windows
+
+2020-07-21  Dirk Eddelbuettel  <edd@debian.org>
+
+	* DESCRIPTION (Version, Date): Roll minor version
+
+	* inst/NEWS.Rd: Additional entries added
+
+2020-07-20  Leonardo Silvestri  <lsilvestri@ztsdb.org>
+
+	* vignettes/nanotime/rmd/nanotime-intro.Rmd: Additional edits
+
+2020-07-19  Dirk Eddelbuettel  <edd@debian.org>
+
+	* vignettes/nanotime/rmd/nanotime-intro.Rmd: Additional edits
+	* vignettes/nanotime/rmd/nanotime-intro.bib: Updated bibliography
+
+2020-07-11  Leonardo Silvestri  <lsilvestri@ztsdb.org>
+
+	* DESCRIPTION (Version, Date): Roll minor version
+
+	* inst/include/nanotime/duration.hpp: move headers to 'nanotime'
+	and put 'interval' and 'period' in a namespace
+	* directory inst/include/nanotime/globals.hpp: Idem
+	* inst/include/nanotime/interval.hpp: Idem
+	* inst/include/nanotime/period.hpp: Idem
+	* inst/include/nanotime/pseudovector.hpp: Idem
+	* inst/include/nanotime/utilities.hpp: Idem
+	* src/duration.cpp: Idem
+	* src/interval.cpp: Idem
+	* src/nanotime.cpp: Idem
+	* src/period.cpp: Idem
+	* src/rounding.cpp: Idem
+	* src/Makevars: Idem
+	* inst/include/nanotime/pseudovector.hpp: let 'pseudovector' return a
+	different type than the input which gives more flexibility
+
+2020-05-17  Dirk Eddelbuettel  <edd@debian.org>
+
+	* vignettes/nanotime-intro.pdf: Copy of prebuilt vignette from rmd/
+	* vignettes/nanotime-introduction.Rnw: Sweave shell for prebuilt vignette
+
+	* .travis.yml: Switch to bionic, and testing via R 4.0.0
+
+2020-05-16  Leonardo Silvestri  <lsilvestri@ztsdb.org>
+
+	* DESCRIPTION (Version, Date): Roll minor version
+
+ 	* R/nanoduration.R: correct NA and negative subsetting; implement 'rep'
+ 	* R/nanoival.R: Idem
+ 	* R/nanoperiod.R: Idem
+ 	* R/nanotime.R: Idem
+ 	* inst/include/globals.hpp: correct NA and negative subsetting
+ 	* inst/include/interval.hpp: Idem
+ 	* inst/include/utilities.hpp: Idem
+ 	* inst/tinytest/test_nanoduration.R: Idem
+ 	* inst/tinytest/test_nanoival.R: Idem
+ 	* inst/tinytest/test_nanoperiod.R: Idem
+ 	* inst/tinytest/test_nanotime.R: Idem
+ 	* src/duration.cpp: Idem
+ 	* src/interval.cpp: Idem
+ 	* src/nanotime.cpp: Idem
+ 	* src/period.cpp: Idem
+	* man/rep-nanoduration-method.Rd: document 'rep'
+	* man/rep-nanoival-method.Rd: document 'rep'
+	* man/rep-nanoperiod-method.Rd: document 'rep'
+	* man/rep-nanotime-method.Rd: document 'rep'
+
+2020-05-10  Leonardo Silvestri  <lsilvestri@ztsdb.org>
+
+	* DESCRIPTION (Version, Date): Roll minor version
+
+	* R/nanoival.R: check param types before invoking C functions; use
+	'na.rm' in 'is.unsorted'
+	* inst/tinytest/test_nanoival.R: Idem
+	* R/nanoperiod.R: check param types before invoking C functions
+	* R/nanotime.R: Idem
+	* inst/tinytest/test_nanoperiod.R: Idem
+	* src/RcppExports.cpp: Idem
+	* src/interval.cpp: Idem
+	* man/nanotime.Rd: document 'tz' param behaviour in constructor
+
+2020-04-25  Leonardo Silvestri  <lsilvestri@ztsdb.org>
+
+	* DESCRIPTION (Version, Date): Roll minor version
+
+	* NAMESPACE: Added rounding functions 'nano_floor' and 'nano_ceiling'
+	* R/RcppExports.R: Idem
+ 	* R/nanoduration.R: Idem
+ 	* R/nanoperiod.R: Idem
+ 	* R/nanotime.R: Idem
+ 	* inst/include/period.hpp: Idem
+ 	* inst/tinytest/test_nanoduration.R: Idem
+ 	* inst/tinytest/test_nanoperiod.R: Idem
+ 	* man/rounding.Rd: Idem
+ 	* src/RcppExports.cpp: Idem
+ 	* src/rounding.cpp: Idem
+
+	* vignettes/nanotime-introduction.Rnw: Wrapper as in anytime
+	* vignettes/nanotime-intro.pdf: Pre-made pdf
+	* vignettes/nanotime/rmd/nanotime-intro.Rmd: New draft vignette
+	* vignettes/nanotime/rmd/nanotime-intro.bib: New bibliography
+
+2020-04-09  Dirk Eddelbuettel  <edd@debian.org>
+
+	* README.md: Add 'last commit' badge
+
+2020-03-31  Leonardo Silvestri  <lsilvestri@ztsdb.org>
+
+	* DESCRIPTION (Version, Date): Roll minor version
+
+	* R/nanoduration.R: Added all.equal
+ 	* R/nanoival.R: Idem
+ 	* R/nanoperiod.R: Idem
+ 	* R/nanotime.R: Idem
+ 	* inst/tinytest/test_nanoduration.R: Idem
+ 	* inst/tinytest/test_nanoival.R: Idem
+ 	* inst/tinytest/test_nanoperiod.R: Idem
+ 	* inst/tinytest/test_nanotime.R: Idem
+ 	* man/all.equal-nanoperiod-ANY-method.Rd: deleted
+	* man/all.equal.nanotime.Rd: Idem
+ 	* man/all.equal.nanoduration.Rd: Idem
+ 	* man/all.equal.nanoival.Rd: Idem
+ 	* man/all.equal.nanoperiod.Rd: Idem
+
+2020-03-29  Leonardo Silvestri  <lsilvestri@ztsdb.org>
+
+	* DESCRIPTION: fixed 0-length-vector ops
+	* R/RcppExports.R: Idem
+ 	* R/nanoperiod.R: Idem
+ 	* inst/include/utilities.hpp: Idem
+ 	* inst/tinytest/test_nanoival.R: Idem
+ 	* inst/tinytest/test_nanoperiod.R: Idem
+ 	* inst/tinytest/test_nanotime.R: Idem
+ 	* src/RcppExports.cpp: Idem
+ 	* src/interval.cpp: Idem
+ 	* src/nanotime.cpp: Idem
+ 	* src/period.cpp: Idem
+
+2020-03-27  Leonardo Silvestri  <lsilvestri@ztsdb.org>
+
+	* DESCRIPTION: added %in%.nanotime
+	* NAMESPACE: Idem
+ 	* R/RcppExports.R: Idem
+ 	* R/nanoival.R: Idem
+ 	* R/nanoperiod.R: Idem
+ 	* inst/tinytest/test_nanoival.R: Idem
+ 	* man/nanoduration.Rd: Idem
+ 	* man/nanoival.Rd: Idem
+ 	* man/nanoperiod.Rd: Idem
+ 	* man/nanotime.Rd: Idem
+ 	* man/set_operations.Rd: Idem
+ 	* src/RcppExports.cpp: Idem
+ 	* src/interval.cpp: Idem
+
+2020-03-25  Dirk Eddelbuettel  <edd@debian.org>
+
+	* DESCRIPTION (Version, Date): Roll minor version
+
+	* DESCRIPTION (LinkingTo): Add RcppDate providing date.h
+	* src/nanotime.cpp (nanotime_wday_impl): Update one accessor for
+	newer version of date.h
+
+	* inst/include/date.h: Deleted as no longer needed
+
+	* .travis.yml (install): Install RcppDate
+
+	* inst/include/globals.hpp: Add a single #nocov
+
+2020-03-23  Dirk Eddelbuettel  <edd@debian.org>
+
+	* DESCRIPTION (Version, Date): Roll minor version
+
+2020-03-22  Leonardo Silvestri  <lsilvestri@ztsdb.org>
+
+	* README.md: updated information
+
+2020-03-21  Leonardo Silvestri  <lsilvestri@ztsdb.org>
+
+	* inst/include/globals.hpp: parse format ending with 'Z' for data.table compatibility
+	* src/period.cpp: fix vectorized 'plus'/'minus' ops for 'nanoperiod'
+	* inst/tinytest/test_nanoperiod.R: Idem
+
+2020-03-20  Dirk Eddelbuettel  <edd@debian.org>
+
+	* src/duration.cpp: Slightly more idiomatic Rcpp
+	* src/period.cpp: Idem
+	* R/nanoduration.R: Idem
+	* R/nanoperiod.R: Idem
+	* R/nanotime.R: Idem
+
+2020-03-19  Dirk Eddelbuettel  <edd@debian.org>
+
+	* src/interval.cpp: Slightly more idiomatic Rcpp
+	* R/nanoival.R: Idem
+
+2020-03-18  Dirk Eddelbuettel  <edd@debian.org>
+
+	* DESCRIPTION (Version, Date): Roll minor version
+
+	* DESCRIPTION (Imports): Updated versioned Depends: on RcppCCTZ
+
+	* NAMESPACE: Turn on registration
+
+	* src/nanotime.cpp: Slightly more idiomatic Rcpp
+	* R/nanotime.R: Idem
+
+2020-03-15  Dirk Eddelbuettel  <edd@debian.org>
+
+	* DESCRIPTION (Version, Date): Roll minor version
+
+	* src/duration.cpp: Small fix to cast to plain old type
+	* src/interval.cpp: Idem
+	* src/nanotime.cpp: Idem
+
+	* src/Makevars (PKG_CXXFLAGS): Minor edits
+
+	* cleanup: Added minor helper
+
+2020-03-14  Leonardo Silvestri  <lsilvestri@ztsdb.org>
+
+	[ The following reflects a fairly substantial set of changes made
+	over a longer period and are just summarized here ]
+	* DESCRIPTION: Add versioned Depends on RcppCCTZ
+	* NAMESPACE: Load dynamic library
+	* R/duration.R: Add new nanoival, duration, and period
+	* R/nanoival.R: Idem
+	* R/nanotime.R: Idem
+	* R/period.R: Idem
+	* inst/include/date.h: Idem
+	* inst/include/duration.hpp: Idem
+	* inst/include/globals.hpp: Idem
+	* inst/include/interval.hpp: Idem
+	* inst/include/period.hpp: Idem
+	* inst/include/pseudovector.hpp: Idem
+	* inst/include/utilities.hpp: Idem
+	* inst/tinytest/test_data.frame.R: Idem
+	* inst/tinytest/test_duration.R: Idem
+	* inst/tinytest/test_nanoival.R: Idem
+	* inst/tinytest/test_nanotime.R: Idem
+	* inst/tinytest/test_ops.R: Idem
+	* inst/tinytest/test_period.R: Idem
+	* man/duration.Rd: Idem
+	* man/nanoival.Rd: Idem
+	* man/nanotime.Rd: Idem
+	* man/period.Rd: Idem
+	* src/Makevars: Idem
+	* src/duration.cpp: Idem
+	* src/interval.cpp: Idem
+	* src/nanotime.cpp: Idem
+	* src/period.cpp: Idem
+
+	* .travis.yml: For now load development version of RcppCCTZ from GitHub
+
+2019-11-21  Dirk Eddelbuettel  <edd@debian.org>
+
+	* DESCRIPTION (Version, Date): New minor version
+
+	* inst/tinytest/test_*.R: Moved from ../unitTest, changed to tinytest
+	* tests/tinytest.R: Add test runner for tinytest
+	* DESCRIPTION (Suggests): Add tinytest, remove RUnit
+	* .travis.yml (install): Add r-cran-tinytest, remove r-cran-runit
+	* tests/runTests.R: Removed RUnit test runner
+
+2019-11-20  Dirk Eddelbuettel  <edd@debian.org>
+
+	* DESCRIPTION (Version, Date): New minor version
+
+	* R/nanotime.R (as.integer64.nanotime): Adding 'Compare' ops for
+	character and nanotime
+	* inst/unitTests/test_ops.R: Adjust one existing test, and add six
+	new ones for character and nanotime comparisons
+	* man/nanotime.Rd: Document new comparison operators
+
 2019-05-25  Dirk Eddelbuettel  <edd@debian.org>
 
 	* DESCRIPTION (Date, Version): Release 0.2.4
