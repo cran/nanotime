@@ -1,3 +1,41 @@
+2020-08-09  Dirk Eddelbuettel  <edd@debian.org>
+
+	* DESCRIPTION (Version, Date): Release 0.3.1
+
+	* R/nanoival.R: Add \dontrun{} because of Solaris
+	* R/nanoperiod.R: Idem
+	* R/nanotime.R: Idem
+	* man/nano_year.Rd: Idem
+
+	* man/nanoperiod.Rd: Idem
+        * man/nanotime.Rd: Idem
+        * man/rounding.Rd: Idem
+        * man/seq-nanoival-method.Rd: Idem
+        * man/seq.nanotime.Rd: Idem
+
+        * inst/tinytest/test_nanoival.R: Skip some tests on Solaris
+        * inst/tinytest/test_nanoperiod.R: Idem
+        * inst/tinytest/test_nanotime.R: Idem
+
+2020-08-08  Dirk Eddelbuettel  <edd@debian.org>
+
+	* DESCRIPTION (Version, Date): Roll minor version, small edit
+
+	* src/interval.cpp: Add some tests for non-zero length vectors
+	* inst/tinytest/test_nanotime.R: Skip one test upsetting SAN
+	* tests/tinytest.R: Default back to serial tests
+
+	* src/strnlen.cpp: Added strnlen_ to help Solaris
+	* inst/include/nanotime/utilities.hpp: Declare it
+	* src/interval.cpp: Use it
+	* src/nanotime.cpp: Idem
+
+2020-08-07  Leonardo Silvestri  <lsilvestri@ztsdb.org>
+
+	* src/period.cpp: Add extra braces to appease macOS compiler
+	* src/inst/include/nanotime/globals.hpp: Use chrono duration; remove
+	ambiguous time_point and seconds declarations
+
 2020-08-05  Dirk Eddelbuettel  <edd@debian.org>
 
 	* DESCRIPTION (Date, Version): Release 0.3.0
