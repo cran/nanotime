@@ -1,3 +1,82 @@
+2021-08-09  Dirk Eddelbuettel  <edd@debian.org>
+
+	* DESCRIPTION (Version, Date): Release 0.3.3
+
+2021-08-08  Leonardo Silvestri  <lsilvestri@ztsdb.org>
+
+	* src/period.cpp:  Fix for `plus` and `minus` adjustment
+	* R/nanoperiod.R: Idem
+        * inst/tinytest/test_nanoperiod.R: Idem
+	* man/nanoperiod.Rd: Idem
+
+2021-04-06  Dirk Eddelbuettel  <edd@debian.org>
+
+	* DESCRIPTION (URL, BugRreports): Added to DESCRIPTION file
+
+2021-03-28  Dirk Eddelbuettel  <edd@debian.org>
+
+	* docs/mkdmt-src/: Moved mkdocs-material input
+
+2020-12-30  Dirk Eddelbuettel  <edd@debian.org>
+
+	* .github/workflows/ci.yaml: Rename job from build to ci
+
+2020-12-25  Dirk Eddelbuettel  <edd@debian.org>
+
+	* .github/workflows/ci.yaml: Small tweaks to CI YAML file
+
+2020-12-13  Dirk Eddelbuettel  <edd@debian.org>
+
+	* README.md: Add CI badge
+
+2020-12-06  Dirk Eddelbuettel  <edd@debian.org>
+
+	* DESCRIPTION (Version, Date): Roll minor version
+
+	* .travis.yml: Switch to run.sh from r-ci for focal and bspm
+	* .github/workflows/ci.yaml: Use run.sh from r-ci
+
+2020-12-06  Colin Umansky  <statquant@outlook.com>
+
+	* inst/tinytest/test_nanoduration.R: Added tests for comparison
+
+2020-12-05  Colin Umansky  <statquant@outlook.com>
+
+	* R/nanoduration.R: Support nanoduration to character comparison
+	* man/nanoduration.Rd: Document new feature
+	* inst/tinytest/test_nanoduration.R: Updated tests
+
+2020-10-25  Dirk Eddelbuettel  <edd@debian.org>
+
+	* DESCRIPTION (Version, Date): Roll minor version
+
+	* docker/r-devel/Dockerfile: Added for simpler r-devel checks
+
+2020-10-24  Dirk Eddelbuettel  <edd@debian.org>
+
+	* inst/tinytest/test_nanotime.R: Add explicit check.tzone=FALSE to
+	equality test for POSIXct comparison
+        * inst/tinytest/test_nanoival.R: Renable full tests, add bit64
+        * inst/tinytest/test_nanoperiod.R: Idem
+        * inst/tinytest/test_nanotime.R: Idem
+        * inst/tinytest/test_ops.R: Idem
+
+2020-09-11  Dirk Eddelbuettel  <edd@debian.org>
+
+	* docs/: Added package website
+
+	* README.md: Added badge and short paragraph linking to documentation
+
+2020-09-07  Leonardo Silvestri  <lsilvestri@ztsdb.org>
+
+	* demo/ggplot2Example.R: Updated and extended demo
+
+2020-09-04  Dirk Eddelbuettel  <edd@debian.org>
+
+	* DESCRIPTION (Version, Date): Roll minor version
+
+	* demo/ggplot2Example.R: New demo based on Leonardo's example repo
+
 2020-09-03  Dirk Eddelbuettel  <edd@debian.org>
 
 	* DESCRIPTION (Version, Date): Release 0.3.2
