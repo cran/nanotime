@@ -1,12 +1,11 @@
 ## nanotime: Nanosecond-Resolution Time Objects for R
 
-[![Build Status](https://travis-ci.org/eddelbuettel/nanotime.svg)](https://travis-ci.org/eddelbuettel/nanotime)
 [![CI](https://github.com/eddelbuettel/nanotime/workflows/ci/badge.svg)](https://github.com/eddelbuettel/nanotime/actions?query=workflow%3Aci)
 [![License](https://eddelbuettel.github.io/badges/GPL2+.svg)](https://www.gnu.org/licenses/gpl-2.0.html)
 [![CRAN](https://www.r-pkg.org/badges/version/nanotime)](https://cran.r-project.org/package=nanotime)
 [![Dependencies](https://tinyverse.netlify.com/badge/nanotime)](https://cran.r-project.org/package=nanotime)
 [![Downloads](https://cranlogs.r-pkg.org/badges/nanotime?color=brightgreen)](https://www.r-pkg.org/pkg/nanotime)
-[![Code Coverage](https://codecov.io/gh/eddelbuettel/nanotime/graph/badge.svg)](https://codecov.io/gh/eddelbuettel/nanotime)
+[![Code Coverage](https://app.codecov.io/gh/eddelbuettel/nanotime/graph/badge.svg)](https://app.codecov.io/gh/eddelbuettel/nanotime)
 [![Last Commit](https://img.shields.io/github/last-commit/eddelbuettel/nanotime)](https://github.com/eddelbuettel/nanotime)
 [![Documentation](https://img.shields.io/badge/documentation-is_here-blue)](https://eddelbuettel.github.io/nanotime/)
 
