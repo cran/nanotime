@@ -22,6 +22,7 @@
 \alias{as.nanoduration,integer64-method}
 \alias{as.nanoduration,numeric-method}
 \alias{as.nanoduration,integer-method}
+\alias{as.nanoduration,difftime-method}
 \alias{as.nanoduration,NULL-method}
 \alias{as.nanoduration,missing-method}
 \alias{show,nanoduration-method}
@@ -34,20 +35,33 @@
 \alias{-,nanoduration,integer64-method}
 \alias{-,nanoduration,integer-method}
 \alias{-,nanoduration,numeric-method}
+\alias{-,nanoduration,difftime-method}
 \alias{-,nanoduration,ANY-method}
 \alias{-,nanotime,nanoduration-method}
+\alias{-,nanotime,difftime-method}
 \alias{-,integer64,nanoduration-method}
 \alias{-,integer,nanoduration-method}
 \alias{-,numeric,nanoduration-method}
+\alias{-,difftime,nanoduration-method}
 \alias{-,ANY,nanoduration-method}
 \alias{+,nanoduration,ANY-method}
 \alias{+,nanoduration,nanoduration-method}
 \alias{+,nanoduration,integer64-method}
 \alias{+,nanoduration,numeric-method}
+\alias{+,nanoduration,difftime-method}
 \alias{+,nanotime,nanoduration-method}
+\alias{+,nanotime,difftime-method}
+\alias{+,nanoduration,nanotime-method}
+\alias{+,difftime,nanotime-method}
 \alias{+,nanoival,nanoduration-method}
+\alias{-,nanoival,nanoduration-method}
+\alias{+,nanoduration,nanoival-method}
+\alias{+,nanoival,difftime-method}
+\alias{-,nanoival,difftime-method}
+\alias{+,difftime,nanoival-method}
 \alias{+,integer64,nanoduration-method}
 \alias{+,numeric,nanoduration-method}
+\alias{+,difftime,nanoduration-method}
 \alias{*,nanoduration,numeric-method}
 \alias{*,nanoduration,integer64-method}
 \alias{*,numeric,nanoduration-method}
@@ -78,7 +92,7 @@
 An object of class \code{nanoduration} of length 1.
 }
 \usage{
-nanoduration(hours, minutes, seconds, nanoseconds)
+nanoduration(hours = 0L, minutes = 0L, seconds = 0L, nanoseconds = 0L)
 
 \S4method{as.nanoduration}{character}(x)
 
@@ -87,6 +101,8 @@ nanoduration(hours, minutes, seconds, nanoseconds)
 \S4method{as.nanoduration}{numeric}(x)
 
 \S4method{as.nanoduration}{integer}(x)
+
+\S4method{as.nanoduration}{difftime}(x)
 
 \S4method{as.nanoduration}{`NULL`}(x)
 
@@ -112,15 +128,21 @@ nanoduration(hours, minutes, seconds, nanoseconds)
 
 \S4method{-}{nanoduration,numeric}(e1, e2)
 
+\S4method{-}{nanoduration,difftime}(e1, e2)
+
 \S4method{-}{nanoduration,ANY}(e1, e2)
 
 \S4method{-}{nanotime,nanoduration}(e1, e2)
+
+\S4method{-}{nanotime,difftime}(e1, e2)
 
 \S4method{-}{integer64,nanoduration}(e1, e2)
 
 \S4method{-}{integer,nanoduration}(e1, e2)
 
 \S4method{-}{numeric,nanoduration}(e1, e2)
+
+\S4method{-}{difftime,nanoduration}(e1, e2)
 
 \S4method{-}{ANY,nanoduration}(e1, e2)
 
@@ -132,13 +154,33 @@ nanoduration(hours, minutes, seconds, nanoseconds)
 
 \S4method{+}{nanoduration,numeric}(e1, e2)
 
+\S4method{+}{nanoduration,difftime}(e1, e2)
+
 \S4method{+}{nanotime,nanoduration}(e1, e2)
 
+\S4method{+}{nanotime,difftime}(e1, e2)
+
+\S4method{+}{nanoduration,nanotime}(e1, e2)
+
+\S4method{+}{difftime,nanotime}(e1, e2)
+
 \S4method{+}{nanoival,nanoduration}(e1, e2)
+
+\S4method{-}{nanoival,nanoduration}(e1, e2)
+
+\S4method{+}{nanoduration,nanoival}(e1, e2)
+
+\S4method{+}{nanoival,difftime}(e1, e2)
+
+\S4method{-}{nanoival,difftime}(e1, e2)
+
+\S4method{+}{difftime,nanoival}(e1, e2)
 
 \S4method{+}{integer64,nanoduration}(e1, e2)
 
 \S4method{+}{numeric,nanoduration}(e1, e2)
+
+\S4method{+}{difftime,nanoduration}(e1, e2)
 
 \S4method{*}{nanoduration,numeric}(e1, e2)
 
