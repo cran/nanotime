@@ -32,7 +32,7 @@ setClass("nanotime", contains = "integer64")
 ##' @section Input and Output Format:
 ##'
 ##' Formatting and character conversion for \code{nanotime} objects is
-##' done by functions from the \code{\link{RcppCCTZ}} package relying
+##' done by functions from the \pkg{RcppCCTZ} package relying
 ##' on code from its embedded \code{CCTZ} library. The default format
 ##' is ISO3339 compliant: \code{\%Y-\%m-\%dT\%H:\%M:\%E9S\%Ez}. It
 ##' specifies a standard ISO 8601 part for date and time --- as well
@@ -86,6 +86,12 @@ setClass("nanotime", contains = "integer64")
 ##' @param value argument for \code{nanotime-class}
 ##' @param quote indicates if the output of \code{print} should be
 ##'     quoted
+##' @param accurate in the conversion from \code{POSIXct} to
+##'     \code{nanotime}, indicates if one wants to preserve the
+##'     maximum precision possible; the default is \code{TRUE}, but in
+##'     most situations the loss of precision is negligible, and
+##'     setting this parameter to \code{FALSE} will make the
+##'     conversion nearly an order of magnitude faster
 ##' @return A nanotime object
 ##' @author Dirk Eddelbuettel
 ##' @author Leonardo Silvestri
@@ -96,6 +102,7 @@ setClass("nanotime", contains = "integer64")
 ##' as.nanotime("1970-01-01T00:00:00.000000001+00:00")
 ##' as.nanotime("2020-03-10 Europe/Berlin")
 ##' as.nanotime("2020-03-10 18:31:23.001", tz="America/New_York")
+##' as.nanotime("2020-03-10T040947190301440", format="%Y-%m-%dT%H%M%S%E*f")
 ##' x <- x + 1
 ##' print(x)
 ##' format(x)
@@ -106,8 +113,8 @@ setClass("nanotime", contains = "integer64")
 ##' seq(x, by=as.nanoperiod("1d"), length.out=5, tz="Asia/Tokyo")
 ##' }
 ##' @seealso \code{\link{nanoival}}, \code{\link{nanoduration}},
-##'     \code{\link{nanoperiod}}, \code{\link{seq.nanotime}}
-
+##' \code{\link{nanoperiod}}, \code{\link{seq.nanotime}} as well as
+##' the documentation in package \pkg{RcppCCTZ}.
 nanotime <- function(from, ...) {
     if (missing(from)) {
         from = NULL
@@ -193,10 +200,15 @@ nanotime.matrix <- function(x) {
 }
 
 
-.nanotime_posixct <- function(from) {
-    ## force last three digits to be zero
+.nanotime_posixct <- function(from, accurate=TRUE) {
     n <- names(from)
-    res <- new("nanotime", as.integer64(as.numeric(from) * 1e6) * 1000)
+    from <- as.numeric(from)
+    if (accurate) {
+        frac <- from - trunc(from)
+        res  <- new("nanotime", bit64::as.integer64(from)*1e9 + round(frac*1e9))
+    } else {
+        res <- new("nanotime", bit64::as.integer64(as.numeric(from) * 1e9))
+    }
     if (!is.null(n)) {
         names(S3Part(res, strictS3=TRUE)) <- n
     }
@@ -209,7 +221,7 @@ setMethod("nanotime", signature(from="POSIXct"), .nanotime_posixct)
 ##' @rdname nanotime
 setMethod("as.nanotime", signature(from="POSIXct"), .nanotime_posixct)
 
-setAs("POSIXct", "nanotime", .nanotime_posixct)
+setAs("POSIXct", "nanotime", function(from) .nanotime_posixct(from))
 
 
 ##' @rdname nanotime
@@ -326,7 +338,18 @@ setAs("nanotime", "POSIXlt", function(from) as.POSIXlt.nanotime(from))
 
 ##' @rdname nanotime
 as.Date.nanotime <- function(x, ...) {
-    as.Date(as.POSIXct(x))
+    arguments <- list(...)
+    if (!("tz" %in% names(args))) {
+        arguments <- c(arguments, list(tz="UTC"))
+    }
+    other_args <- setdiff(names(arguments), list('x', 'tz'))
+    if (length(other_args) > 0) {
+        stop(paste("'as.Date' called with arguments other than 'tz': ",
+                   paste0("'", other_args, "'", collapse=", ")))
+    }
+    as.Date(ISOdate(year = nano_year(x, arguments$tz),
+                    month = nano_month(x, arguments$tz),
+                    day = nano_mday(x, arguments$tz)))
 }
 
 setAs("nanotime", "Date", function(from) as.Date(as.POSIXct(from)))

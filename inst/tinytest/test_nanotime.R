@@ -132,9 +132,23 @@ if (!isSolaris) {
 }
 
 ##test_nanotime_POSIXct <- function() {
-p <- as.POSIXct("1970-01-01 00:00:00", tz="America/New_York")
+p <- as.POSIXct("1970-01-01 00:00:00", tz="America/New_York", accurate=FALSE)
 expect_identical(nanotime(p), nanotime("1970-01-01T00:00:00.000000000-05:00"))
 expect_identical(as.nanotime(p), nanotime("1970-01-01T00:00:00.000000000-05:00"))
+
+## See: https://github.com/eddelbuettel/nanotime/issues/115
+## This one should break if multiplying the double by 1E9 directly
+## without considering the integer and fraction parts separately.
+p <- as.POSIXct(as.numeric('0x1.91f18e4d0065p+30'), origin = '1970-01-01')
+expect_identical(p, as.POSIXct(as.nanotime(p)))
+
+## This one is negative, making sure that negative doubles are also consistent.
+p <- as.POSIXct(as.numeric('-0x1.c6e8c4d077ae4p+30'), origin = '1970-01-01')
+expect_identical(p, as.POSIXct(as.nanotime(p)))
+
+## with the 'accurate' parameter set to FALSE, the round trip should not be equal:
+p <- as.POSIXct(as.numeric('0x1.91f18e4d0065p+30'), origin = '1970-01-01')
+expect_false(p == as.POSIXct(as.nanotime(p, accurate=FALSE)))
 
 ##test_nanotime_POSIXlt <- function() {
 l <- as.POSIXlt("1970-01-01 00:00:00", tz="America/New_York")
@@ -330,7 +344,19 @@ expect_equal(p, as.POSIXct("1970-01-01 00:00:00", tz="UTC"), check.tzone=FALSE)
 options(nanotimeTz=oldTz)
 
 ##test_as_Date <- function() {
-expect_identical(as.Date(nanotime(0)), as.Date("1970-01-01"))
+## test scalar
+nanotime_scalar <- nanotime("2023-09-21T22:00:00 America/New_York")
+expect_identical(as.Date(nanotime_scalar, tz="UTC"), as.Date("2023-09-22"))
+## test vector
+nanotime_vec <- rep(nanotime("2023-09-21T22:00:00 America/New_York"), 2)
+tz_vec <- c("UTC", "America/New_York")
+expect_identical(as.Date(nanotime_vec, tz=tz_vec), as.Date(c("2023-09-22", "2023-09-21")))
+## test missing argument 'tz': now UTC filled in
+expect_silent(as.Date(nanotime_vec))
+expect_identical(as.Date(nanotime_vec), as.Date(nanotime_vec, tz="UTC"))
+## test exception for extraneous argument:
+expect_error(as.Date(nanotime_vec, y=2, z=3), "'as.Date' called with arguments other than 'tz':  'y', 'z'")
+expect_silent(as.Date(x=nanotime_vec))  # check we can still name 'x' without an exception
 
 
 ## c, subset, subassign and binds

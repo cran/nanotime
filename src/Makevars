@@ -1,5 +1,5 @@
-## We want C++11 
-CXX_STD = CXX11
+## Compile as C++17
+CXX_STD = CXX17
 
 ## We need headers from our package, the directory is not automatically included
 PKG_CXXFLAGS = -I../inst/include

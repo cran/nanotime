@@ -81,9 +81,9 @@ as.nanotime(from, ...)
 
 nanotime.matrix(x)
 
-\S4method{nanotime}{POSIXct}(from)
+\S4method{nanotime}{POSIXct}(from, accurate = TRUE)
 
-\S4method{as.nanotime}{POSIXct}(from)
+\S4method{as.nanotime}{POSIXct}(from, accurate = TRUE)
 
 \S4method{nanotime}{POSIXlt}(from)
 
@@ -211,6 +211,13 @@ also be set via \code{options("nanotimeTz")} and uses
 
 \item{x, from}{\code{nanotime} objects}
 
+\item{accurate}{in the conversion from \code{POSIXct} to
+\code{nanotime}, indicates if one wants to preserve the
+maximum precision possible; the default is \code{TRUE}, but in
+most situations the loss of precision is negligible, and
+setting this parameter to \code{TRUE} will make the conversion
+nearly an order of magnitude faster}
+
 \item{quote}{indicates if the output of \code{print} should be
 quoted}
 
@@ -271,7 +278,7 @@ January 1, 1970.
 
 
 Formatting and character conversion for \code{nanotime} objects is
-done by functions from the \code{\link{RcppCCTZ}} package relying
+done by functions from the \pkg{RcppCCTZ} package relying
 on code from its embedded \code{CCTZ} library. The default format
 is ISO3339 compliant: \code{\%Y-\%m-\%dT\%H:\%M:\%E9S\%Ez}. It
 specifies a standard ISO 8601 part for date and time --- as well
@@ -311,6 +318,7 @@ print(x)
 as.nanotime("1970-01-01T00:00:00.000000001+00:00")
 as.nanotime("2020-03-10 Europe/Berlin")
 as.nanotime("2020-03-10 18:31:23.001", tz="America/New_York")
+as.nanotime("2020-03-10T040947190301440", format="\%Y-\%m-\%dT\%H\%M\%S\%E*f")
 x <- x + 1
 print(x)
 format(x)
@@ -323,7 +331,8 @@ seq(x, by=as.nanoperiod("1d"), length.out=5, tz="Asia/Tokyo")
 }
 \seealso{
 \code{\link{nanoival}}, \code{\link{nanoduration}},
-    \code{\link{nanoperiod}}, \code{\link{seq.nanotime}}
+\code{\link{nanoperiod}}, \code{\link{seq.nanotime}} as well as
+the documentation in package \pkg{RcppCCTZ}.
 }
 \author{
 Dirk Eddelbuettel
